@@ -1,24 +1,28 @@
 package BankAccounts;
 
 import lombok.Getter;
-
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicReference;
-
 @Getter
+
 public class BankAccount {
-    private int accountAmount;
-    private Command command;
-    private String inLine;
+    public int accountAmount;
+    public Command command;
+    public String inLine;
+    public int percent; // установка комиссии за снятие денег (в %)
+
+    public BankAccount(int percent) {
+        this.percent = percent;
+    }
 
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scCommand = new Scanner(System.in);
+        Scanner scInt = new Scanner(System.in);
         boolean check = true;
         do {
             System.out.println("Введите одну из команд (DEPOSIT, GET, BALANCE):");
-            inLine = scanner.nextLine().trim();
+            inLine = scCommand.nextLine().trim();
             checkInLine();
-            int money = 0;
+            int money;
             switch (getCommand()) {
                 case BALANCE:
                     System.out.println("Остаток на счету: " + getAccountAmount() + " рублей");
@@ -26,36 +30,42 @@ public class BankAccount {
                 case DEPOSIT:
                     do {
                         System.out.println("Внесите сумму для пополнения счёта:");
-                        while (!scanner.hasNextInt()) {
+                        while (!scInt.hasNextInt()) {
                             System.out.println("Неверно! Повторите ввод ещё раз.");
-                            money = scanner.nextInt();
+                            scInt.next();
                         }
-                        if (money < 0) {
-                            System.out.println("Сумма не может быть отрицательной!");
+                        money = scInt.nextInt();
+                        if (money <= 0) {
+                            System.out.println("Сумма должна быть больше нуля!");
                         }
                     } while (money < 0);
                     depositMoney(money);
                     break;
                 case GET:
                     do {
-                        System.out.println("Введите сумму для снятия со счёта:");
-                        while (!scanner.hasNextInt()) {
+                        System.out.println("Комиссия за снятие составит " + percent + "% от суммы" +
+                                "\nВведите сумму для снятия со счёта:");
+                        while (!scInt.hasNextInt()) {
                             System.out.println("Неверно! Повторите ввод ещё раз.");
-                            scanner.next();
+                            scInt.next();
                         }
-                        money = scanner.nextInt();
+                        money = scInt.nextInt();
                         if (money < 0) {
                             System.out.println("Сумма не может быть отрицательной!");
                         }
                     } while (money < 0);
-                    if (getMoney(money)) {
+                    int checkMoney = getMoney(money);
+                    if (checkMoney == 1) {
                         System.out.println("Вы сняли " + money + " рублей");
-                    } else {
+                        System.out.println("Комиссия составила " + money / 100 * percent + " рублей");
+                    } else if (checkMoney == -1) {
                         System.out.println("Недостаточно средст на счёте!");
+                    } else if (checkMoney == 0) {
+                        System.out.println("Вы не можете снять деньги! Не истекло установленное время, после последнего пополнения счёта.");
                     }
                     break;
                 case EXIT:
-                    System.out.println("Програма завершена...");
+                    System.out.println("Работа со счётом заершена...");
                     check = false;
                     break;
                 default:
@@ -78,12 +88,12 @@ public class BankAccount {
         }
     }
 
-    public boolean getMoney(int money) {
+    public int getMoney(int money) {
         if (money <= accountAmount) {
             accountAmount -= money;
-            return true;
+            return 1;
         } else {
-            return false;
+            return -1;
         }
     }
 

@@ -9,10 +9,10 @@ public class CreditAccount extends BankAccount {
 
     public int getMoney(int money) {
 
-        int commission = money / 100 * percent;
-        money += commission;
-        if (money <= accountAmount) {
-            accountAmount -= money;
+        this.commission = money / 100 * percent;
+        money += this.commission;
+        if (money <= this.accountAmount) {
+            this.accountAmount -= money;
             return 1;
         } else {
             return -1;

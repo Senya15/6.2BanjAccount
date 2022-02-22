@@ -22,7 +22,11 @@ public class DepositAccount extends BankAccount {
             if (money <= accountAmount) {
                 accountAmount -= money;
                 return 1;
-            } else return -1;
+            } else {
+                long timeLeft = timeNow.getTime().getTime() - setTime.getTime().getTime();
+                System.out.println("Не возможно снять деньги со счёта. Не прошло " + timeLeft);
+                return -1;
+            }
         } else return 0;
     }
 

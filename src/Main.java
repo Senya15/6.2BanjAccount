@@ -19,35 +19,6 @@ public class Main {
     static Scanner scCommand = new Scanner(System.in);
 
     public static void main(String[] args) {
-        long timeMileSeconds = 259200000L; // 20,76145 минут
-        int timeDays = (int) (timeMileSeconds / 86_400_000); // дней
-        int timeHr = (int) (timeMileSeconds % 86_400_000 / 3_600_000); // 0,34602416666667 часа
-        int timeMinutes = (int) (timeMileSeconds % 3_600_000 / 60000); // 20 минут
-        int ostatokSeconds = (int) (timeMileSeconds % 60000 / 1000); // секунд
-
-        String days;
-        String hours;
-        String minutes;
-        String seconds;
-     /*   if (timeDays == 1) days = "день";
-        if (timeDays < 5) days = "дня";
-        if (timeDays >= 5 || timeDays == 0) days = "дней";*/
-        switch (timeDays) {
-            case 1:
-                days = "день";
-                break;
-            case 2:
-            case 3:
-            case 4:
-                days = "дня";
-                break;
-            default:
-                days = "дней";
-        }
-
-        System.out.printf("%d %s %d час(а/ов) %d минут(ы) %d секунд(ы)%n",
-                timeDays, days, timeHr, timeMinutes, ostatokSeconds);
-
         boolean check = true;
         do {
             System.out.printf("Выберите счёт (1 -> %s, 2 -> %s, 3 -> %s, 9 -> проверка баланса всех счетов, " +
@@ -67,7 +38,7 @@ public class Main {
                     System.out.printf("Остаток на счету %s: %d рублей%n",
                             mainAccountName, mainAccount.getAccountAmount());
                     System.out.printf("Остаток на счету %s: %d рублей%n",
-                            mainAccountName, depositAccount.getAccountAmount());
+                            depositAccount, depositAccount.getAccountAmount());
                     System.out.printf("Остаток на счету %s: %d рублей%n%n",
                             creditAccountName, creditAccount.getAccountAmount());
                     break;

@@ -8,11 +8,20 @@ import java.util.GregorianCalendar;
 @Getter
 public class DepositAccount extends BankAccount {
     private GregorianCalendar setTime;
+    private final int DAY = 60;
+    private final int HOUR = 15;
+    private final int MINUTE = 56;
 
     public void depositMoney(int money) {
         this.accountAmount += money;
+        setTimer();
+    }
+
+    public void setTimer() {
         setTime = new GregorianCalendar();
-        setTime.add(Calendar.MINUTE, 3);
+        setTime.add(Calendar.DATE, DAY);
+        setTime.add(Calendar.HOUR, HOUR);
+        setTime.add(Calendar.MINUTE, MINUTE);
     }
 
     public int getMoney(int money) {
@@ -25,13 +34,10 @@ public class DepositAccount extends BankAccount {
                 return -1;
             }
         } else {
-            int timeLeft = (int) (setTime.getTime().getTime() - timeNow.getTime().getTime());
-            int timeLeftHr = timeLeft / 3_600_000;
-            int timeLeftMinutes = timeLeft / 3_600_000 / 6_0000;
-            int timeLeftSeconds = timeLeft % 60_000 / 1000;
-            System.out.printf("Не возможно снять деньги со счёта. С последнего пополнения счёта не прошло " +
-                            "%d час(а/ов) %d минут(ы) %d секунд(ы)%n",
-                    timeLeftHr, timeLeftMinutes, timeLeftSeconds);
+            long timeLeft = (setTime.getTime().getTime() - timeNow.getTime().getTime());
+            Timer timer = new Timer(timeLeft);
+            System.out.println("Не возможно снять деньги со счёта! С последнего пополнения счёта не прошло "
+                    + timer.getTime());
             return 0;
         }
     }

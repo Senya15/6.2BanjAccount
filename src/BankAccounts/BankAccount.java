@@ -5,15 +5,10 @@ import lombok.Getter;
 @Getter
 public class BankAccount {
     public int accountAmount;
-    public int percent; // комиссии за снятие денег (в %)
-    public int commission; // комиссии за снятие денег (в рублях)
-    public BankAccount(int percent) {
-        this.percent = percent;
-    }
 
     public int getMoney(int money) {
-        if (money <= accountAmount) {
-            accountAmount -= money;
+        if (money <= this.accountAmount) {
+            this.accountAmount -= money;
             return 1;
         } else {
             return -1;
@@ -21,7 +16,7 @@ public class BankAccount {
     }
 
     public void depositMoney(int money) {
-        accountAmount += money;
+        this.accountAmount += money;
     }
 
     public boolean checkSend(BankAccount receiver) {

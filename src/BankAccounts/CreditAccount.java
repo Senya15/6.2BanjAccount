@@ -1,15 +1,14 @@
 package BankAccounts;
 
+import lombok.Getter;
+
+@Getter
 public class CreditAccount extends BankAccount {
-
-    public CreditAccount(int percent) {
-
-        super(percent);
-    }
+    public static final float PERCENT = 1.5f; // комиссии за снятие денег (в %)
+    public int commission; // комиссии за снятие денег (в рублях)
 
     public int getMoney(int money) {
-
-        this.commission = money / 100 * percent;
+        this.commission = (int) (money / 100 * PERCENT);
         money += this.commission;
         if (money <= this.accountAmount) {
             this.accountAmount -= money;

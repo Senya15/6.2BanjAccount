@@ -8,9 +8,9 @@ import java.util.GregorianCalendar;
 @Getter
 public class DepositAccount extends BankAccount {
     private GregorianCalendar setTime;
-    private final int DAY = 60;
-    private final int HOUR = 15;
-    private final int MINUTE = 56;
+    private final int DAY = 30;
+    private final int HOUR = 0;
+    private final int MINUTE = 0;
 
     public void depositMoney(int money) {
         this.accountAmount += money;

@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class BankAccount {
-    public int accountAmount;
+    int accountAmount;
 
     public int getMoney(int money) {
         if (money <= this.accountAmount) {

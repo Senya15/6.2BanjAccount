@@ -1,7 +1,7 @@
 package BankAccounts;
 
-public class Timer {
-    long timeMileSeconds;
+ class Timer {
+    private final long timeMileSeconds;
 
     public Timer(long timeMileSeconds) {
         this.timeMileSeconds = timeMileSeconds;
@@ -22,7 +22,7 @@ public class Timer {
                 timeDays, d, timeHr, hr, timeMinutes, min, timeSeconds, sec);
     }
 
-    public String getDay(int timeDays) {
+    private String getDay(int timeDays) {
         return switch (timeDays % 10) {
             case 1 -> "день";
             case 2, 3, 4 -> "дня";
@@ -30,7 +30,7 @@ public class Timer {
         };
     }
 
-    public String getHour(int timeHr) {
+    private String getHour(int timeHr) {
         return switch (timeHr % 10) {
             case 1 -> "час";
             case 2, 3, 4 -> "часа";
@@ -38,7 +38,7 @@ public class Timer {
         };
     }
 
-    public String getEnding(int timeMinOrSec) {
+    private String getEnding(int timeMinOrSec) {
         return switch (timeMinOrSec % 10) {
             case 1 -> "а";
             case 2, 3, 4 -> "ы";

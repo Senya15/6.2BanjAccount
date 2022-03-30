@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class CreditAccount extends BankAccount {
     public static final float PERCENT = 1.5f; // комиссии за снятие денег (в %)
-    public int commission; // комиссии за снятие денег (в рублях)
+    private int commission; // комиссии за снятие денег (в рублях)
 
     public int getMoney(int money) {
         this.commission = (int) (money / 100 * PERCENT);

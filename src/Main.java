@@ -1,9 +1,7 @@
-import BankAccounts.BankAccount;
-import BankAccounts.Command;
-import BankAccounts.CreditAccount;
-import BankAccounts.DepositAccount;
+import BankAccounts.*;
 
 import java.util.Scanner;
+import java.util.Timer;
 
 public class Main {
     static BankAccount mainAccount = new BankAccount();

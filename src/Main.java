@@ -38,7 +38,7 @@ public class Main {
                     System.out.printf("Остаток на счету %s: %d рублей%n",
                             mainAccountName, mainAccount.getAccountAmount());
                     System.out.printf("Остаток на счету %s: %d рублей%n",
-                            depositAccount, depositAccount.getAccountAmount());
+                            depositAccountName, depositAccount.getAccountAmount());
                     System.out.printf("Остаток на счету %s: %d рублей%n%n",
                             creditAccountName, creditAccount.getAccountAmount());
                     break;
@@ -136,7 +136,7 @@ public class Main {
     }
 
     public static void send(BankAccount senderAccount, BankAccount receiver, String receiverName) {
-        if (senderAccount.checkSend(receiver)) {
+        if (senderAccount.equals(receiver)) {
             System.out.println("Вы пытаетесь перевести денги на этот же счёт.\nВыберите другой счёт.");
             return;
         }

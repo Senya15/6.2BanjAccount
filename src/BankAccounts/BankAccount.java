@@ -19,10 +19,6 @@ public class BankAccount {
         this.accountAmount += money;
     }
 
-    public boolean checkSend(BankAccount receiver) {
-        return BankAccount.this.equals(receiver);
-    }
-
     public boolean send(BankAccount receiver, int amount) {
         if (getMoney(amount) == 1) {
             receiver.depositMoney(amount);
